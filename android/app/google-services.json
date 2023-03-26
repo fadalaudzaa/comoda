@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "902289788373",
+    "project_id": "gdsc-e798f",
+    "storage_bucket": "gdsc-e798f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902289788373:android:f5f429537032a80417415c",
+        "android_client_info": {
+          "package_name": "com.example.gdsc_comoda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902289788373-ajcktv3ph2dv0ec76bu1utj8h79om4en.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.gdsc_comoda",
+            "certificate_hash": "220302cf8b402cee409b59a6f4a6eae3a0f6db82"
+          }
+        },
+        {
+          "client_id": "902289788373-gp238i9h6csk8dqo16huutflce4g1dkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUv4ZBk2rXJKIHUMJ7LSqCpL3J4gv4BlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902289788373-cunqqrid9bkijc3brvi490q6s1js5aji.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "902289788373-7ct82nv5mb2manjdnbqerjn7cfvmn82v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gdscComoda"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:comoda/pages/signup.dart';
 import 'package:text_divider/text_divider.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'home.dart';
 
 bool rememberMe = false;
+User? _user;
 
 class SignIn extends StatefulWidget {
   @override
@@ -12,7 +15,44 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  @override
+  String? email;
+  String? password;
+  final GoogleSignIn _googleSignIn = GoogleSignIn(
+      clientId:
+          "com.googleusercontent.apps.902289788373-7ct82nv5mb2manjdnbqerjn7cfvmn82v");
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<User?> _handleSignIn() async {
+    // hold the instance of the authenticated user
+//    FirebaseUser user;
+    // flag to check whether we're signed in already
+    bool isSignedIn = await _googleSignIn.isSignedIn();
+    if (isSignedIn) {
+      // if so, return the current user
+      _user = _auth.currentUser!;
+    } else {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
+      // get the credentials to (access / id token)
+      // to sign in via Firebase Authentication
+      final AuthCredential credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken, idToken: googleAuth.idToken);
+      _user = (await _auth.signInWithCredential(credential)).user;
+    }
+
+    return _user;
+  }
+
+  void onGoogleSignIn(BuildContext context) async {
+    User? user = await _handleSignIn();
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Home()),
+    );
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -115,12 +155,13 @@ class _SignInState extends State<SignIn> {
               Padding(padding: EdgeInsets.symmetric(vertical: 10)),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => Home()),
+                  // );
                   print("login biasa");
                   //taroh code authnya
+                  onGoogleSignIn(context);
                 },
                 child: Container(
                   height: 56,
@@ -165,13 +206,15 @@ class _SignInState extends State<SignIn> {
               //create login with google button
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Home()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => Home()),
+                  // );
                   print("login with google");
-
-                  //taroh code authnya
+                  _googleSignIn.signIn().then((value) {
+                    String userName = value!.displayName!;
+                    String profilePicture = value.photoUrl!;
+                  });
                 },
                 child: Container(
                   height: 56,
