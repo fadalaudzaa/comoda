@@ -1,5 +1,5 @@
 
-![Logo](https://imageup.me/images/c72ce31b-fb51-40c8-9890-37ad934b7ea6.png))
+![Logo](https://imageup.me/images/c72ce31b-fb51-40c8-9890-37ad934b7ea6.png)
 
 
 
